@@ -1,24 +1,20 @@
-def intro():
-    print("=== ECHO RDZENIA LASU ===")
-    print("Legenda głosi, że gdzieś w sercu tego lasu znajduje się Rdzeń.")
-    print("Źródło mocy, które potrafi spełnić jedno życzenie.")
-    print("Wielu próbowało. Mało kto wrócił.\n")
+print("=== ECHO RDZENIA LASU ===")
+print("Legenda głosi, że gdzieś w sercu tego lasu znajduje się Rdzeń.")
+print("Źródło mocy, które potrafi spełnić jedno życzenie.")
+print("Wielu próbowało. Mało kto wrócił.\n")
 
+imie = input("Podaj swoje imię, wędrowcze: ")
+print(f"\nWitaj, {imie}. Las już wie, że tu jesteś...\n")
 
-def pobierz_imie():
-    imie = input("Podaj swoje imię, wędrowcze: ")
-    print(f"\nWitaj, {imie}. Las już wie, że tu jesteś...\n")
-    return imie
+ekwipunek = []
 
+print("Stoisz na rozdrożu.")
+print("p - Kamienna ścieżka prowadząca w głąb lasu")
+print("l - Zarośnięta droga w stronę bagien")
+sciezka = input("Twój wybór: ")
 
-def wybor_sciezki():
-    print("Stoisz na rozdrożu.")
-    print("p - Kamienna ścieżka prowadząca w głąb lasu")
-    print("l - Zarośnięta droga w stronę bagien")
-    return input("Twój wybór: ")
-
-
-def kamienna_sciezka(imie):
+# PIERWSZA ŚCIEŻKA
+if sciezka == 'p':
     print("\nIdziesz kamienną ścieżką.")
     print("Powietrze robi się ciężkie, a ziemia lekko drży.")
     print("Napotykasz starego strażnika run.\n")
@@ -28,24 +24,24 @@ def kamienna_sciezka(imie):
     if wybor == 'r':
         print("\nStrażnik widzi w Tobie rozsądek.")
         print("Daje Ci amulet ochrony.")
-        return "amulet"
+        ekwipunek.append("amulet")
 
     elif wybor == 'a':
         print("\nZły pomysł.")
         print("Strażnik nie był tu przez wieki bez powodu.")
         print("Giniesz, a las zapamiętuje Twoją głupotę.")
-        return "smierc"
+        print("\nKONIEC GRY.")
+        exit()
 
     elif wybor == 'u':
         print("\nUciekasz, ale potykasz się i gubisz zapasy.")
-        return "nic"
 
     else:
         print("\nLas nie rozumie niezdecydowanych.")
-        return "smierc"
+        print("\nKONIEC GRY.")
+        exit()
 
-
-def bagna(imie):
+elif sciezka == 'l':
     print("\nBagna bulgoczą pod Twoimi stopami.")
     print("Mgła odsłania cień ogromnej istoty.\n")
 
@@ -54,76 +50,96 @@ def bagna(imie):
     if wybor == 's':
         print("\nUdaje Ci się przemknąć niezauważonym.")
         print("Znajdujesz stary miecz wbity w drzewo.")
-        return "miecz"
+        ekwipunek.append("miecz")
 
     elif wybor == 'w':
         print("\nWalczysz dzielnie, ale bez broni nie masz szans.")
-        return "smierc"
+        print("\nKONIEC GRY.")
+        exit()
 
     elif wybor == 'c':
         print("\nWycofujesz się, zachowując życie.")
-        return "nic"
 
     else:
         print("\nBagna pochłaniają niezdecydowanych.")
-        return "smierc"
+        print("\nKONIEC GRY.")
+        exit()
 
+else:
+    print("\nBłądzisz bez celu, aż las Cię pochłania.")
+    print("\nKONIEC GRY.")
+    exit()
 
-def final(imie, ekwipunek):
-    print("\nDocierasz do serca lasu.")
-    print("Przed Tobą pulsuje Rdzeń.\n")
+print("\nWędrujesz dalej...\n")
 
-    if "amulet" in ekwipunek and "miecz" in ekwipunek:
-        print("Dzięki amuletowi i mieczowi jesteś w stanie podejść bliżej.")
-        print("Rdzeń spełnia Twoje życzenie.")
-        print(f"{imie}, wracasz jako legenda.")
-        print("=== DOBRE ZAKOŃCZENIE ===")
+# DRUGA DECYZJA (zawsze druga ścieżka)
+if sciezka == 'p':
+    print("\nBagna bulgoczą pod Twoimi stopami.")
+    print("Mgła odsłania cień ogromnej istoty.\n")
 
-    elif "amulet" in ekwipunek or "miecz" in ekwipunek:
-        print("Masz tylko część potrzebnej mocy.")
-        print("Rdzeń Cię oszczędza, ale niczego nie daje.")
-        print("Wracasz żywy. To już coś.")
-        print("=== NEUTRALNE ZAKOŃCZENIE ===")
+    wybor = input("w - walcz, s - skradaj się, c - cofaj się: ")
+
+    if wybor == 's':
+        print("\nUdaje Ci się przemknąć niezauważonym.")
+        print("Znajdujesz stary miecz wbity w drzewo.")
+        ekwipunek.append("miecz")
+
+    elif wybor == 'w':
+        print("\nWalczysz dzielnie, ale bez broni nie masz szans.")
+        print("\nKONIEC GRY.")
+        exit()
+
+    elif wybor == 'c':
+        print("\nWycofujesz się, zachowując życie.")
 
     else:
-        print("Rdzeń uznaje Cię za niegodnego.")
-        print("Las zamyka się za Tobą na zawsze.")
-        print("=== ZŁE ZAKOŃCZENIE ===")
+        print("\nBagna pochłaniają niezdecydowanych.")
+        print("\nKONIEC GRY.")
+        exit()
 
+else:
+    print("\nIdziesz kamienną ścieżką.")
+    print("Powietrze robi się ciężkie, a ziemia lekko drży.")
+    print("Napotykasz starego strażnika run.\n")
 
-def main():
-    intro()
-    imie = pobierz_imie()
-    ekwipunek = []
+    wybor = input("r - porozmawiaj, a - zaatakuj, u - uciekaj: ")
 
-    sciezka = wybor_sciezki()
+    if wybor == 'r':
+        print("\nStrażnik widzi w Tobie rozsądek.")
+        print("Daje Ci amulet ochrony.")
+        ekwipunek.append("amulet")
 
-    if sciezka == 'p':
-        wynik = kamienna_sciezka(imie)
-    elif sciezka == 'l':
-        wynik = bagna(imie)
+    elif wybor == 'a':
+        print("\nZły pomysł.")
+        print("Strażnik nie był tu przez wieki bez powodu.")
+        print("\nKONIEC GRY.")
+        exit()
+
+    elif wybor == 'u':
+        print("\nUciekasz, ale potykasz się i gubisz zapasy.")
+
     else:
-        print("\nBłądzisz bez celu, aż las Cię pochłania.")
-        return
-
-    if wynik == "smierc":
+        print("\nLas nie rozumie niezdecydowanych.")
         print("\nKONIEC GRY.")
-        return
-    elif wynik != "nic":
-        ekwipunek.append(wynik)
+        exit()
 
-    print("\nWędrujesz dalej...\n")
+# FINAŁ
+print("\nDocierasz do serca lasu.")
+print("Przed Tobą pulsuje Rdzeń.\n")
 
-    # Druga decyzja – zawsze druga próba
-    wynik2 = bagna(imie) if sciezka == 'p' else kamienna_sciezka(imie)
+if "amulet" in ekwipunek and "miecz" in ekwipunek:
+    print("Dzięki amuletowi i mieczowi jesteś w stanie podejść bliżej.")
+    print("Rdzeń spełnia Twoje życzenie.")
+    print(f"{imie}, wracasz jako legenda.")
+    print("=== DOBRE ZAKOŃCZENIE ===")
 
-    if wynik2 == "smierc":
-        print("\nKONIEC GRY.")
-        return
-    elif wynik2 != "nic":
-        ekwipunek.append(wynik2)
+elif "amulet" in ekwipunek or "miecz" in ekwipunek:
+    print("Masz tylko część potrzebnej mocy.")
+    print("Rdzeń Cię oszczędza, ale niczego nie daje.")
+    print("Wracasz żywy. To już coś.")
+    print("=== NEUTRALNE ZAKOŃCZENIE ===")
 
-    final(imie, ekwipunek)
-
-
-main()
+else:
+    print("Rdzeń uznaje Cię za niegodnego.")
+    print("Las zamyka się za Tobą na zawsze.")
+    print("=== ZŁE ZAKOŃCZENIE ===")
